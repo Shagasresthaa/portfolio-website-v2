@@ -1,6 +1,6 @@
 <template>
     <div class="hello">
-      <h1>This is Login Page</h1>
+      <h1>This is About Page</h1>
     </div>
   </template>
   
@@ -8,6 +8,6 @@
   import { defineComponent } from 'vue';
   
   export default defineComponent({
-    name: 'LoginPage'
+    name: 'AboutPage'
   });
   </script>
