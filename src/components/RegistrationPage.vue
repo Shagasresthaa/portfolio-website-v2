@@ -1,11 +1,15 @@
 <template>
   <div id="app">
     <div class="login-container">
-      <h1 class="hdr1">Login</h1>
-      <form @submit.prevent="login">
+      <h1 class="hdr1">Register</h1>
+      <form @submit.prevent="register">
         <div class="form-group">
           <label for="username">Username</label>
           <input type="text" id="username" v-model="username" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" v-model="emailAddr" />
         </div>
         <div class="form-group">
           <label for="password">Password</label>
@@ -17,12 +21,27 @@
             />
             <font-awesome-icon
               :icon="passwordVisible ? 'eye' : 'eye-slash'"
-              @click="togglePasswordVisibility"
+              @click="togglePasswordVisibilityPass"
               class="password-toggle-icon"
             />
           </div>
         </div>
-        <button type="submit">Login</button>
+        <div class="form-group">
+          <label for="password">Confirm Password</label>
+          <div class="password-wrapper">
+            <input
+              :type="passwordVisibleConf ? 'text' : 'password'"
+              id="password"
+              v-model="confPassword"
+            />
+            <font-awesome-icon
+              :icon="passwordVisibleConf ? 'eye' : 'eye-slash'"
+              @click="togglePasswordVisibilityConPass"
+              class="password-toggle-icon"
+            />
+          </div>
+        </div>
+        <button type="submit">Register</button>
       </form>
     </div>
   </div>
@@ -43,23 +62,77 @@ export default defineComponent({
 
   setup() {
     const username = ref("");
+    const emailAddr = ref("");
     const password = ref("");
+    const confPassword = ref("");
     const passwordVisible = ref(false);
+    const passwordVisibleConf = ref(false);
 
-    const login = () => {
-      console.log("Email:", username.value, "Password:", password.value);
+    const register = () => {
+      if (
+        username.value == "" ||
+        emailAddr.value == "" ||
+        password.value == "" ||
+        confPassword.value == ""
+      ) {
+        alert(
+          "Some fields are empty please kindly verify and resubmit the form!"
+        );
+        console.log(
+          "Email:",
+          emailAddr.value,
+          "Username:",
+          username.value,
+          "Password:",
+          password.value,
+          "Conf Password:",
+          confPassword.value
+        );
+      } else if (!(password.value === confPassword.value)) {
+        alert(
+          "The Passwords entered donot match please verify the entered passwords and resubmit the form!"
+        );
+        console.log(
+          "Email:",
+          emailAddr.value,
+          "Username:",
+          username.value,
+          "Password:",
+          password.value,
+          "Conf Password:",
+          confPassword.value
+        );
+      } else {
+        console.log(
+          "Email:",
+          emailAddr.value,
+          "Username:",
+          username.value,
+          "Password:",
+          password.value,
+          "Conf Password:",
+          confPassword.value
+        );
+      }
     };
 
-    const togglePasswordVisibility = () => {
+    const togglePasswordVisibilityPass = () => {
       passwordVisible.value = !passwordVisible.value;
+    };
+    const togglePasswordVisibilityConPass = () => {
+      passwordVisibleConf.value = !passwordVisibleConf.value;
     };
 
     return {
+      emailAddr,
       username,
       password,
+      confPassword,
       passwordVisible,
-      login,
-      togglePasswordVisibility,
+      passwordVisibleConf,
+      register,
+      togglePasswordVisibilityPass,
+      togglePasswordVisibilityConPass,
     };
   },
 });
