@@ -1,47 +1,52 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+import HomeView from "../views/HomeView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: "/",
+    name: "home",
+    component: HomeView,
   },
   {
-    path: '/about',
-    name: 'about',
-    component: () => import('../views/AboutView.vue')
+    path: "/about",
+    name: "about",
+    component: () => import("../views/AboutView.vue"),
   },
   {
-    path: '/admin',
-    name: 'admin',
-    component: () => import('../views/AdminView.vue')
+    path: "/admin",
+    name: "admin",
+    component: () => import("../views/AdminView.vue"),
   },
   {
-    path: '/blog',
-    name: 'blog',
-    component: () => import('../views/BlogView.vue')
+    path: "/blog",
+    name: "blog",
+    component: () => import("../views/BlogView.vue"),
   },
   {
-    path: '/contact',
-    name: 'contact',
-    component: () => import('../views/ContactView.vue')
+    path: "/contact",
+    name: "contact",
+    component: () => import("../views/ContactView.vue"),
   },
   {
-    path: '/projects',
-    name: 'projects',
-    component: () => import('../views/ProjectsView.vue')
+    path: "/projects",
+    name: "projects",
+    component: () => import("../views/ProjectsView.vue"),
   },
   {
-    path: '/login',
-    name: 'login',
-    component: () => import('../views/LoginView.vue')
-  }
-]
+    path: "/login",
+    name: "login",
+    component: () => import("../views/LoginView.vue"),
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: () => import("../views/RegistrationView.vue"),
+  },
+];
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
