@@ -34,6 +34,9 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
+import { login as authenticate } from "../services/authService";
+
+
 library.add(faEye, faEyeSlash);
 
 export default defineComponent({
@@ -46,8 +49,30 @@ export default defineComponent({
     const password = ref("");
     const passwordVisible = ref(false);
 
-    const login = () => {
-      console.log("Email:", username.value, "Password:", password.value);
+    const login = async () => {
+      try {
+        const user = {
+          username: username.value,
+          password: password.value,
+        };
+
+        const response = await authenticate(user);
+
+        if (response.status === 200) { 
+          window.alert("Login Successful!");
+          console.log(response);
+          
+        } else if(response.status === 401){
+          window.alert("Login Failed");
+          console.log(response);
+        } else {
+          window.alert("Possible Error encountered" + response.data);
+          console.log(response);
+        }
+      } catch (err) {
+        // handle error
+        console.error(err);
+      }
     };
 
     const togglePasswordVisibility = () => {

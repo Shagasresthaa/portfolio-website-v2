@@ -53,6 +53,8 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
+import { register as registerUser } from "../services/authService";
+
 library.add(faEye, faEyeSlash);
 
 export default defineComponent({
@@ -68,14 +70,14 @@ export default defineComponent({
     const passwordVisible = ref(false);
     const passwordVisibleConf = ref(false);
 
-    const register = () => {
+    const register = async () => {
       if (
         username.value == "" ||
         emailAddr.value == "" ||
         password.value == "" ||
         confPassword.value == ""
       ) {
-        alert(
+        window.alert(
           "Some fields are empty please kindly verify and resubmit the form!"
         );
         console.log(
@@ -89,7 +91,7 @@ export default defineComponent({
           confPassword.value
         );
       } else if (!(password.value === confPassword.value)) {
-        alert(
+        window.alert(
           "The Passwords entered donot match please verify the entered passwords and resubmit the form!"
         );
         console.log(
@@ -103,16 +105,27 @@ export default defineComponent({
           confPassword.value
         );
       } else {
-        console.log(
-          "Email:",
-          emailAddr.value,
-          "Username:",
-          username.value,
-          "Password:",
-          password.value,
-          "Conf Password:",
-          confPassword.value
-        );
+        try {
+          const user = {
+            username: username.value,
+            password: password.value,
+            email: emailAddr.value
+          };
+
+          const response = await registerUser(user);
+
+          if (response.status === 201) { 
+            window.alert("Registration Successful!");
+            //console.log(response);
+
+          } else {
+            window.alert("Possible Error encountered" + response.data);
+            //console.log(response);
+          }
+      } catch (err) {
+          // handle error
+          console.error(err);
+      }
       }
     };
 
