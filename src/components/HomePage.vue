@@ -1,11 +1,13 @@
 <template>
-  <div class="app">
-    <div class="intro">
-      <p class="h4"><b>Greetings!</b></p>
-      <p class="h1">I'm Shaga Sresthaa</p>
-      <h1 class="display-5">
-        I'm an Assistant Systems Engineer at Tata Consultancy Services
-      </h1>
+  <div class="mainContainer">
+    <div class="introMain">
+      <div class="intro">
+        <p class="h4"><b>Greetings!</b></p>
+        <p class="h1">I'm Shaga Sresthaa</p>
+        <h1 class="display-5">
+          I'm an Assistant Systems Engineer at Tata Consultancy Services
+        </h1>
+      </div>
     </div>
   </div>
 </template>
@@ -19,13 +21,28 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-body {
-  background: linear-gradient(90deg, #000000 50%, #003300 100%) !important;
-  height: 100vh !important;
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
-.app {
-  text-align: left;
+
+.mainContainer {
+  //background: linear-gradient(90deg, #000000 50%, #003300 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   width: 100%;
-  margin: 2rem;
+}
+
+.introMain {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.intro {
+  text-align: left;
 }
 </style>
